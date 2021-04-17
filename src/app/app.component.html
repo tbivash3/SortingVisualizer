@@ -1,7 +1,8 @@
 <div class="lineContainer">
-  <ng-container *ngFor="let height of randomNumberList">
+  <ng-container *ngFor="let height of randomNumberList$ | async">
     <div class="line" [style.height.px]="height"></div>
   </ng-container>
 </div>
-
-<button (click)="sort()">Insertion Sort</button>
+{{ sortType$ | async }}
+<button (click)="sortMerge()">Merge Sort</button>
+<button (click)="sortInsertion()">Insertion Sort</button>
