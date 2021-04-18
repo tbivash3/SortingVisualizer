@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { sortType } from '../state/sort.actions';
 
 @Injectable({ providedIn: 'root' })
 export class InsertionSort {
-  constructor(private store: Store<{ sort: number[] }>) {}
+  constructor() {}
 
-  async sort(sortingData: number[]) {
-    let length = sortingData.length;
+  sort(data: number[], swapArray: number[][]) {
+    let length = data.length;
 
-    for (let i = 1; i < length; i++) {
-      let key = sortingData[i];
-      let j = i - 1;
-      while (j >= 0 && sortingData[j] > key) {
-        sortingData[j + 1] = sortingData[j];
-        j = j - 1;
-        this.store.dispatch(sortType({ data: [...sortingData] }));
-        await new Promise((r) => setTimeout(r, 0));
+    for (let i = 0; i < length; i++) {
+      let minIndex = i;
+
+      for (let j = i + 1; j < length; j++) {
+        if (data[j] < data[minIndex]) {
+          minIndex = j;
+        }
       }
 
-      sortingData[j + 1] = key;
+      swapArray.push([i, minIndex]);
+      let temp = data[i];
+      data[i] = data[minIndex];
+      data[minIndex] = temp;
     }
   }
 }

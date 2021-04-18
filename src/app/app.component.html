@@ -1,8 +1,23 @@
 <div class="lineContainer">
-  <ng-container *ngFor="let height of randomNumberList$ | async">
-    <div class="line" [style.height.px]="height"></div>
+  <ng-container *ngFor="let height of randomNumberList; let i = index">
+    <div
+      *ngIf="i != redIndex && i != yellowIndex"
+      class="line"
+      [style.height.px]="height"
+    ></div>
+    <div
+      *ngIf="i == redIndex"
+      class="line"
+      [style.height.px]="height"
+      [style.border-color]="'red'"
+    ></div>
+    <div
+      *ngIf="i == yellowIndex"
+      class="line"
+      [style.height.px]="height"
+      [style.border-color]="'yellow'"
+    ></div>
   </ng-container>
 </div>
-{{ sortType$ | async }}
 <button (click)="sortMerge()">Merge Sort</button>
 <button (click)="sortInsertion()">Insertion Sort</button>

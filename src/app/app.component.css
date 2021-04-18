@@ -1,6 +1,6 @@
 .line {
-  border-left: 6px solid green;
-  margin: 1px;
+  border-left: 5px solid green;
+  margin-right: 5px;
 }
 
 .lineContainer {
