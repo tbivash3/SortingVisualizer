@@ -11,12 +11,13 @@ export class InsertionSort {
       let minIndex = i;
 
       for (let j = i + 1; j < length; j++) {
+        swapArray.push([i, j, 0]);
         if (data[j] < data[minIndex]) {
           minIndex = j;
         }
       }
 
-      swapArray.push([i, minIndex]);
+      swapArray.push([i, minIndex, 1]);
       let temp = data[i];
       data[i] = data[minIndex];
       data[minIndex] = temp;

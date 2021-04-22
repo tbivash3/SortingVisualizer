@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     private mergeSort: MergeSort
   ) {}
 
-  sortSpeed: number = 100;
+  sortSpeed: number = 10;
 
   randomNumberList: number[] = [];
 
@@ -33,12 +33,15 @@ export class AppComponent implements OnInit {
   }
 
   sortInsertion() {
+    this.swapArray = [];
     this.insertionSort.sort([...this.randomNumberList], this.swapArray);
     this.animate();
   }
 
   sortMerge() {
+    this.swapArray = [];
     this.mergeSort.sort([...this.randomNumberList], this.swapArray);
+    this.animateMergeSort();
   }
 
   async animate() {
@@ -50,15 +53,29 @@ export class AppComponent implements OnInit {
 
       await new Promise((r) => setTimeout(r, this.sortSpeed));
 
-      let temp = this.randomNumberList[swapPosition[0]];
-      this.randomNumberList[swapPosition[0]] = this.randomNumberList[
-        swapPosition[1]
-      ];
-      this.randomNumberList[swapPosition[1]] = temp;
+      if (swapPosition[2] == 1) {
+        let temp = this.randomNumberList[swapPosition[0]];
+        this.randomNumberList[swapPosition[0]] = this.randomNumberList[
+          swapPosition[1]
+        ];
+        this.randomNumberList[swapPosition[1]] = temp;
 
-      await new Promise((r) => setTimeout(r, this.sortSpeed));
+        await new Promise((r) => setTimeout(r, this.sortSpeed * 5));
+      }
     }
     this.redIndex = -1;
     this.yellowIndex = -1;
+  }
+
+  async animateMergeSort() {
+    for (let i = 0; i < this.swapArray.length; i++) {
+      let swapPosition = this.swapArray[i];
+      this.redIndex = swapPosition[0];
+      this.randomNumberList[swapPosition[0]] = swapPosition[1];
+
+      await new Promise((r) => setTimeout(r, this.sortSpeed));
+    }
+
+    this.redIndex = -1;
   }
 }
