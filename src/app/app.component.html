@@ -19,5 +19,28 @@
     ></div>
   </ng-container>
 </div>
-<button (click)="sortMerge()">Merge Sort</button>
-<button (click)="sortInsertion()">Insertion Sort</button>
+<button (click)="sortMerge()" [disabled]="isSorting">Merge Sort</button>
+<button (click)="sortInsertion()" [disabled]="isSorting">Insertion Sort</button>
+<button (click)="sortQuick()" [disabled]="isSorting">Quick Sort</button>
+
+<div class="slidecontainer">
+  <p>Sort Speed:</p>
+  <input
+    type="range"
+    min="1"
+    max="100"
+    value="50"
+    class="slider"
+    id="myRange"
+  />
+
+  <p>Input Length:</p>
+  <input
+    type="range"
+    min="1"
+    max="100"
+    value="50"
+    class="slider"
+    id="myRange"
+  />
+</div>
