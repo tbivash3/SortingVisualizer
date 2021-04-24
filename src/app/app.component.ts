@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { InsertionSort } from './sortingAlgorithms/InsertionSort';
 import { MergeSort } from './sortingAlgorithms/MergeSort';
 import { QuickSort } from './sortingAlgorithms/QuickSort';
+import { HeapSort } from './sortingAlgorithms/HeapSort';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +16,13 @@ export class AppComponent implements OnInit {
   constructor(
     private insertionSort: InsertionSort,
     private mergeSort: MergeSort,
-    private quickSort: QuickSort
+    private quickSort: QuickSort,
+    private heapSort: HeapSort
   ) {}
 
-  sortSpeed: number = 10;
+  sortSpeed: number = 100;
+
+  arrayLength: number = 10;
 
   isSorting: boolean = false;
 
@@ -35,8 +39,9 @@ export class AppComponent implements OnInit {
   sortedRandomNumberList: number[] = [];
 
   ngOnInit() {
-    this.originalRandomNumberList = Array.from({ length: 100 }, () =>
-      Math.floor(Math.random() * 200)
+    this.originalRandomNumberList = Array.from(
+      { length: this.arrayLength },
+      () => Math.floor(Math.random() * 200)
     );
     this.randomNumberList = [...this.originalRandomNumberList];
 
@@ -49,7 +54,7 @@ export class AppComponent implements OnInit {
     this.swapArray = [];
     this.randomNumberList = [...this.originalRandomNumberList];
     this.insertionSort.sort([...this.randomNumberList], this.swapArray);
-    this.animate();
+    this.animateSwap();
   }
 
   compare(a: number[], b: number[]): boolean {
@@ -75,10 +80,18 @@ export class AppComponent implements OnInit {
     this.swapArray = [];
     this.randomNumberList = [...this.originalRandomNumberList];
     this.quickSort.sort([...this.randomNumberList], this.swapArray);
-    this.animate();
+    this.animateSwap();
   }
 
-  async animate() {
+  sortHeap() {
+    this.isSorting = true;
+    this.swapArray = [];
+    this.randomNumberList = [...this.originalRandomNumberList];
+    this.heapSort.sort([...this.randomNumberList], this.swapArray);
+    this.animateSwap();
+  }
+
+  async animateSwap() {
     for (let i = 0; i < this.swapArray.length; i++) {
       let swapPosition = this.swapArray[i];
 
