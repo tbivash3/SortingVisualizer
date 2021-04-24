@@ -20,9 +20,11 @@ export class AppComponent implements OnInit {
     private heapSort: HeapSort
   ) {}
 
-  sortSpeed: number = 100;
+  sortSpeed: number = 10;
 
-  arrayLength: number = 10;
+  sortFactor: number = 5;
+
+  arrayLength: number = 60;
 
   isSorting: boolean = false;
 
@@ -39,54 +41,69 @@ export class AppComponent implements OnInit {
   sortedRandomNumberList: number[] = [];
 
   ngOnInit() {
+    this.init();
+  }
+
+  init() {
     this.originalRandomNumberList = Array.from(
       { length: this.arrayLength },
       () => Math.floor(Math.random() * 200)
     );
+
+    this.removeItemAll(this.originalRandomNumberList, 0);
     this.randomNumberList = [...this.originalRandomNumberList];
 
     this.sortedRandomNumberList = [...this.randomNumberList];
     this.sortedRandomNumberList.sort((a, b) => a - b);
   }
 
-  sortInsertion() {
+  removeItemAll(arr: number[], value: number) {
+    var i = 0;
+    while (i < arr.length) {
+      if (arr[i] === value) {
+        arr.splice(i, 1);
+      } else {
+        ++i;
+      }
+    }
+    return arr;
+  }
+
+  setArrLength(length: string) {
+    this.arrayLength = Number(length);
+    this.init();
+  }
+
+  setSortSpeed(speed: string) {
+    this.sortFactor = 10 / Number(speed);
+  }
+
+  resetData() {
     this.isSorting = true;
     this.swapArray = [];
     this.randomNumberList = [...this.originalRandomNumberList];
+  }
+
+  sortInsertion() {
+    this.resetData();
     this.insertionSort.sort([...this.randomNumberList], this.swapArray);
     this.animateSwap();
   }
 
-  compare(a: number[], b: number[]): boolean {
-    if (a.length !== b.length) return false;
-
-    for (let i = 0; i < a.length; i++) {
-      if (a[i] !== b[i]) return false;
-    }
-
-    return true;
-  }
-
   sortMerge() {
-    this.isSorting = true;
-    this.swapArray = [];
-    this.randomNumberList = [...this.originalRandomNumberList];
+    this.resetData();
     this.mergeSort.sort([...this.randomNumberList], this.swapArray);
-    this.animateMergeSort();
+    this.animateMergeRoutine();
   }
 
   sortQuick() {
-    this.isSorting = true;
-    this.swapArray = [];
-    this.randomNumberList = [...this.originalRandomNumberList];
+    this.resetData();
     this.quickSort.sort([...this.randomNumberList], this.swapArray);
     this.animateSwap();
   }
 
   sortHeap() {
-    this.isSorting = true;
-    this.swapArray = [];
-    this.randomNumberList = [...this.originalRandomNumberList];
+    this.resetData();
     this.heapSort.sort([...this.randomNumberList], this.swapArray);
     this.animateSwap();
   }
@@ -98,7 +115,7 @@ export class AppComponent implements OnInit {
       this.redIndex = swapPosition[0];
       this.yellowIndex = swapPosition[1];
 
-      await new Promise((r) => setTimeout(r, this.sortSpeed));
+      await new Promise((r) => setTimeout(r, this.sortFactor * this.sortSpeed));
 
       if (swapPosition[2] == 1) {
         let temp = this.randomNumberList[swapPosition[0]];
@@ -107,7 +124,9 @@ export class AppComponent implements OnInit {
         ];
         this.randomNumberList[swapPosition[1]] = temp;
 
-        await new Promise((r) => setTimeout(r, this.sortSpeed * 5));
+        await new Promise((r) =>
+          setTimeout(r, this.sortFactor * this.sortSpeed)
+        );
       }
     }
     this.redIndex = -1;
@@ -115,19 +134,25 @@ export class AppComponent implements OnInit {
     this.isSorting = false;
   }
 
-  async animateMergeSort() {
+  async animateMergeRoutine() {
     for (let i = 0; i < this.swapArray.length; i++) {
       let swapPosition = this.swapArray[i];
-      this.redIndex = swapPosition[0];
 
-      await new Promise((r) => setTimeout(r, this.sortSpeed));
-
-      this.randomNumberList[swapPosition[0]] = swapPosition[1];
-
-      await new Promise((r) => setTimeout(r, this.sortSpeed));
+      if (swapPosition[2] == 0) {
+        this.redIndex = swapPosition[0];
+        this.yellowIndex = swapPosition[1];
+        await new Promise((r) =>
+          setTimeout(r, this.sortFactor * this.sortSpeed)
+        );
+      } else {
+        this.randomNumberList[swapPosition[0]] = swapPosition[1];
+        await new Promise((r) =>
+          setTimeout(r, this.sortFactor * this.sortSpeed)
+        );
+      }
     }
-
     this.redIndex = -1;
+    this.yellowIndex = -1;
     this.isSorting = false;
   }
 }

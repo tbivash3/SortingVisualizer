@@ -27,21 +27,25 @@
 <div class="slidecontainer">
   <p>Sort Speed:</p>
   <input
+    #sortSpeed
+    [disabled]="isSorting"
     type="range"
     min="1"
-    max="100"
-    value="50"
+    max="10"
+    value="5"
     class="slider"
-    id="myRange"
+    (input)="setSortSpeed(sortSpeed.value)"
   />
 
   <p>Input Length:</p>
   <input
+    #arrLength
+    [disabled]="isSorting"
     type="range"
-    min="1"
-    max="100"
-    value="50"
+    min="25"
+    max="150"
+    value="100"
     class="slider"
-    id="myRange"
+    (input)="setArrLength(arrLength.value)"
   />
 </div>

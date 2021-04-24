@@ -36,6 +36,7 @@ export class MergeSort {
     let secondIndex = mid + 1;
 
     while (firstIndex <= mid && secondIndex <= end) {
+      swapArray.push([firstIndex, secondIndex, 0]);
       if (sortingData[firstIndex] < sortingData[secondIndex]) {
         tempArray.push([sortingData[firstIndex], firstIndex]);
         firstIndex++;
@@ -46,11 +47,13 @@ export class MergeSort {
     }
 
     while (firstIndex <= mid) {
+      swapArray.push([firstIndex, -1, 0]);
       tempArray.push([sortingData[firstIndex], firstIndex]);
       firstIndex++;
     }
 
     while (secondIndex <= end) {
+      swapArray.push([secondIndex, -1, 0]);
       tempArray.push([sortingData[secondIndex], secondIndex]);
       secondIndex++;
     }
@@ -58,7 +61,7 @@ export class MergeSort {
     firstIndex = start;
 
     while (firstIndex <= end) {
-      swapArray.push([firstIndex, tempArray[firstIndex - start][0]]);
+      swapArray.push([firstIndex, tempArray[firstIndex - start][0], 1]);
       sortingData[firstIndex] = tempArray[firstIndex - start][0];
       firstIndex++;
     }
