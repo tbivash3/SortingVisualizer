@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
   init() {
     this.originalRandomNumberList = Array.from(
       { length: this.arrayLength },
-      () => Math.floor(Math.random() * 200)
+      () => Math.floor(Math.random() * 500)
     );
 
     this.removeItemAll(this.originalRandomNumberList, 0);

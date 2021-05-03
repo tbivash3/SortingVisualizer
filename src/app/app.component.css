@@ -1,10 +1,67 @@
+.container {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer {
+  margin: 20px auto;
+  width: 550px;
+}
+
 .line {
   border-left: 5px solid green;
   margin-right: 3px;
 }
 
 .lineContainer {
+  height: 500px;
   margin: 20px auto;
   display: flex;
   justify-content: center;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonContainer button {
+  display: inline-block;
+  padding: 0.46em 1.6em;
+  border: 0.1em solid #000000;
+  margin: 0 1em 0.2em 0;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #000000;
+  text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+  background-color: rgb(63, 160, 18);
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.buttonContainer button:hover:enabled {
+  text-shadow: 0 0 2em rgba(255, 255, 255, 1);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.buttonContainer button:disabled {
+  background-color: rgb(193, 240, 195);
+}
+
+.slideContainer {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide p {
+  display: inline-block;
+  width: 100px;
+}
+
+.slide input {
+  display: inline-block;
 }
