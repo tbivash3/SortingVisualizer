@@ -1,4 +1,4 @@
-import { OnInit } from '@angular/core';
+import { AfterViewInit, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import { InsertionSort } from './sortingAlgorithms/InsertionSort';
 import { MergeSort } from './sortingAlgorithms/MergeSort';
@@ -10,7 +10,7 @@ import { HeapSort } from './sortingAlgorithms/HeapSort';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'SortingVisualizer';
 
   constructor(
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
   sortFactor: number = 5;
 
-  arrayLength: number = 60;
+  arrayLength: number = 80;
 
   isSorting: boolean = false;
 
@@ -43,6 +43,19 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.init();
   }
+
+  ngAfterViewInit(): void {
+   
+    const width = this.lineContainer.nativeElement.offsetWidth;
+    const length = Math.floor(width / 28);
+
+    this.arrayLength = length;
+    this.init();
+  }
+
+  @ViewChild('lineContainer')
+  lineContainer!: ElementRef;
+
 
   init() {
     this.originalRandomNumberList = Array.from(

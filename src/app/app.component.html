@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="lineContainer">
+  <div class="lineContainer" #lineContainer>
     <ng-container *ngFor="let height of randomNumberList; let i = index">
       <div
         *ngIf="i != redIndex && i != yellowIndex"
@@ -51,7 +51,7 @@
           #arrLength
           [disabled]="isSorting"
           type="range"
-          min="25"
+          min="29"
           max="150"
           value="80"
           class="slider"
