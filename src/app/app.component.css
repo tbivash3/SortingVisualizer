@@ -1,10 +1,9 @@
 .container {
   width: 80vw;
-  height: 90vh;
-  margin: 20px auto;
-  font-family: "Roboto", sans-serif;
-  display: flex;
-  flex-direction: column;
+  height: 95vh;
+  margin: auto auto;
+  font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+  font-size: 20px;
 }
 
 .line {
@@ -13,35 +12,36 @@
 
 .lineContainer {
   width: 100%;
-  height: 70%;
+  height: 60%;
   display: flex;
   justify-content: center;
 }
 
 .inputContainer {
   margin: auto auto;
-  width: 50%;
-  height: 30%;
+  width: 60%;
+  height: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
 }
+
 .buttonContainer {
+  height: 20%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
 .buttonContainer button {
-  width: 30%;
-  height: 120%;
+  width: 20%;
+  height: 80%;
   display: inline-block;
-  padding: 0.50em 1.8em;
   border: 0.2em solid #000000;
-  margin: 0 3em 0.2em 0;
   box-sizing: border-box;
-  text-decoration: none;
   color: #000000;
-  text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+  font-size: 100%;
+  font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
   background-color: rgb(63, 160, 18);
   text-align: center;
   transition: all 0.15s;
@@ -54,20 +54,17 @@
 }
 
 .buttonContainer button:disabled {
-  background-color: rgb(193, 240, 195);
+  background-color: transparent;
 }
 
 .slideContainer {
-  width: 100%;
-  height: 100%;
-  margin: 50px auto;
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .slide p {
   display: inline-block;
-  width: 100px;
+  margin-right: 10px;
 }
 
 .slide input {

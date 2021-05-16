@@ -5,21 +5,21 @@
         *ngIf="i != redIndex && i != yellowIndex"
         class="line"
         [style.height.px]="height"
-        [style.width.px]="width"
+        [style.width.px]="widthOfLine"
         [style.background-color]="'green'"
       ></div>
       <div
         *ngIf="i == redIndex"
         class="line"
         [style.height.px]="height"
-        [style.width.px]="width"
+        [style.width.px]="widthOfLine"
         [style.background-color]="'red'"
       ></div>
       <div
         *ngIf="i == yellowIndex"
         class="line"
         [style.height.px]="height"
-        [style.width.px]="width"
+        [style.width.px]="widthOfLine"
         [style.background-color]="'yellow'"
       ></div>
     </ng-container>
@@ -27,9 +27,7 @@
   <div class="inputContainer">
     <div class="buttonContainer">
       <button (click)="sortMerge()" [disabled]="isSorting">Merge Sort</button>
-      <button (click)="sortInsertion()" [disabled]="isSorting">
-        Insertion Sort
-      </button>
+      <button (click)="sortInsertion()" [disabled]="isSorting">Insertion Sort</button>
       <button (click)="sortQuick()" [disabled]="isSorting">Quick Sort</button>
       <button (click)="sortHeap()" [disabled]="isSorting">Heap Sort</button>
     </div>

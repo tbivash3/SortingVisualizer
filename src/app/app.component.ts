@@ -20,7 +20,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     private heapSort: HeapSort
   ) {}
 
-  width: number = 0;
+  widthOfLine: number = 0;
+
+  maxHeightOfLine: number = 0;
 
   sortSpeed: number = 10;
 
@@ -43,12 +45,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   sortedRandomNumberList: number[] = [];
 
   ngOnInit() {
-    this.init();
+   
   }
 
   ngAfterViewInit(): void {
    this.updateLineWidth();
-    
+   this.updateLineHeight();
   }
 
   @ViewChild('lineContainer')
@@ -57,7 +59,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   init() {
     this.originalRandomNumberList = Array.from(
       { length: this.arrayLength },
-      () => Math.floor(Math.random() * 500)
+      () => Math.floor(Math.random() * this.maxHeightOfLine)
     );
 
     this.removeItemAll(this.originalRandomNumberList, 0);
@@ -69,7 +71,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   updateLineWidth() {
     const width = this.lineContainer.nativeElement.offsetWidth;
-    
     let lineWidth = Math.floor(width / this.arrayLength) - 3;
 
     if(lineWidth < 1) {
@@ -77,7 +78,14 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.arrayLength = Math.floor(width / 4);
     }
   
-    this.width = lineWidth;
+    this.widthOfLine = lineWidth;
+  }
+
+  updateLineHeight() {
+    const height = this.lineContainer.nativeElement.offsetHeight;
+    let maxLineHeight = Math.floor(0.8 * height);
+    this.maxHeightOfLine = maxLineHeight;
+    this.init();
   }
 
   removeItemAll(arr: number[], value: number) {
