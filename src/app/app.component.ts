@@ -20,6 +20,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     private heapSort: HeapSort
   ) {}
 
+  width: number = 0;
+
   sortSpeed: number = 10;
 
   sortFactor: number = 5;
@@ -45,17 +47,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-   
-    const width = this.lineContainer.nativeElement.offsetWidth;
-    const length = Math.floor(width / 28);
-
-    this.arrayLength = length;
-    this.init();
+   this.updateLineWidth();
+    
   }
 
   @ViewChild('lineContainer')
   lineContainer!: ElementRef;
-
 
   init() {
     this.originalRandomNumberList = Array.from(
@@ -68,6 +65,19 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     this.sortedRandomNumberList = [...this.randomNumberList];
     this.sortedRandomNumberList.sort((a, b) => a - b);
+  }
+
+  updateLineWidth() {
+    const width = this.lineContainer.nativeElement.offsetWidth;
+    
+    let lineWidth = Math.floor(width / this.arrayLength) - 3;
+
+    if(lineWidth < 1) {
+      lineWidth = 1;
+      this.arrayLength = Math.floor(width / 4);
+    }
+  
+    this.width = lineWidth;
   }
 
   removeItemAll(arr: number[], value: number) {
@@ -84,6 +94,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   setArrLength(length: string) {
     this.arrayLength = Number(length);
+    this.updateLineWidth();
     this.init();
   }
 

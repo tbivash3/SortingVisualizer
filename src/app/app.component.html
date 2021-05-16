@@ -5,18 +5,22 @@
         *ngIf="i != redIndex && i != yellowIndex"
         class="line"
         [style.height.px]="height"
+        [style.width.px]="width"
+        [style.background-color]="'green'"
       ></div>
       <div
         *ngIf="i == redIndex"
         class="line"
         [style.height.px]="height"
-        [style.border-color]="'red'"
+        [style.width.px]="width"
+        [style.background-color]="'red'"
       ></div>
       <div
         *ngIf="i == yellowIndex"
         class="line"
         [style.height.px]="height"
-        [style.border-color]="'yellow'"
+        [style.width.px]="width"
+        [style.background-color]="'yellow'"
       ></div>
     </ng-container>
   </div>
@@ -51,9 +55,9 @@
           #arrLength
           [disabled]="isSorting"
           type="range"
-          min="29"
-          max="150"
-          value="80"
+          min="10"
+          max="200"
+          value="110"
           class="slider"
           (input)="setArrLength(arrLength.value)"
         />
