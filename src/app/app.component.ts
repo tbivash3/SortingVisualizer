@@ -24,6 +24,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   maxHeightOfLine: number = 0;
 
+  maxInputLength: number = 200;
+
+  inputLengthValue: number = 0;
+
   sortSpeed: number = 10;
 
   sortFactor: number = 5;
@@ -49,6 +53,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+   this.setMaxInputLength();
    this.updateLineWidth();
    this.updateLineHeight();
   }
@@ -67,6 +72,18 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     this.sortedRandomNumberList = [...this.randomNumberList];
     this.sortedRandomNumberList.sort((a, b) => a - b);
+  }
+
+  setMaxInputLength() {
+    const width = this.lineContainer.nativeElement.offsetWidth;
+
+    const minLineWidthPlusMargin = 1 + 3;
+
+    this.maxInputLength =  Math.floor(width / (minLineWidthPlusMargin + 1));
+
+    console.log(this.maxInputLength);
+
+    this.inputLengthValue = Math.floor(this.maxInputLength / 2);
   }
 
   updateLineWidth() {

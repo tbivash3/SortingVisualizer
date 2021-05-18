@@ -54,8 +54,8 @@
           [disabled]="isSorting"
           type="range"
           min="10"
-          max="200"
-          value="110"
+          [max]="maxInputLength"
+          [value]="inputLengthValue"
           class="slider"
           (input)="setArrLength(arrLength.value)"
         />
