@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   maxInputLength: number = 200;
 
-  inputLengthValue: number = 0;
+  inputLengthValue: number = 100;
 
   sortSpeed: number = 10;
 
@@ -47,10 +47,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   randomNumberList: number[] = [];
 
   sortedRandomNumberList: number[] = [];
-
-  ngOnInit() {
-   
-  }
 
   ngAfterViewInit(): void {
    this.setMaxInputLength();
@@ -80,8 +76,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     const minLineWidthPlusMargin = 1 + 3;
 
     this.maxInputLength =  Math.floor(width / (minLineWidthPlusMargin + 1));
-
-    console.log(this.maxInputLength);
 
     this.inputLengthValue = Math.floor(this.maxInputLength / 2);
   }
