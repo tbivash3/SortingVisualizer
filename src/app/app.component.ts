@@ -46,8 +46,6 @@ export class AppComponent implements AfterViewInit {
 
   randomNumberList: number[] = [];
 
-  sortedRandomNumberList: number[] = [];
-
   ngAfterViewInit(): void {
    this.setMaxInputLength();
    this.updateLineWidth();
@@ -58,16 +56,10 @@ export class AppComponent implements AfterViewInit {
   lineContainer!: ElementRef;
 
   init() {
-    this.originalRandomNumberList = Array.from(
-      { length: this.arrayLength },
-      () => Math.floor(Math.random() * this.maxHeightOfLine)
-    );
+    this.originalRandomNumberList = Array.from({ length: this.arrayLength }, () => Math.floor(Math.random() * this.maxHeightOfLine));
 
     this.removeItemAll(this.originalRandomNumberList, 0);
     this.randomNumberList = [...this.originalRandomNumberList];
-
-    this.sortedRandomNumberList = [...this.randomNumberList];
-    this.sortedRandomNumberList.sort((a, b) => a - b);
   }
 
   setMaxInputLength() {
@@ -121,32 +113,32 @@ export class AppComponent implements AfterViewInit {
     this.sortFactor = 10 / Number(speed);
   }
 
-  resetData() {
+  resetSortingData() {
     this.isSorting = true;
     this.swapArray = [];
     this.randomNumberList = [...this.originalRandomNumberList];
   }
 
   sortInsertion() {
-    this.resetData();
+    this.resetSortingData();
     this.insertionSort.sort([...this.randomNumberList], this.swapArray);
     this.animateSwap();
   }
 
   sortMerge() {
-    this.resetData();
+    this.resetSortingData();
     this.mergeSort.sort([...this.randomNumberList], this.swapArray);
     this.animateMergeRoutine();
   }
 
   sortQuick() {
-    this.resetData();
+    this.resetSortingData();
     this.quickSort.sort([...this.randomNumberList], this.swapArray);
     this.animateSwap();
   }
 
   sortHeap() {
-    this.resetData();
+    this.resetSortingData();
     this.heapSort.sort([...this.randomNumberList], this.swapArray);
     this.animateSwap();
   }
