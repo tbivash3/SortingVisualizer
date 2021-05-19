@@ -23,7 +23,7 @@ export class MergeSort {
     this.merge(sortingData, swapArray, start, mid, end);
   }
 
-  async merge(
+  merge(
     sortingData: Array<number>,
     swapArray: number[][],
     start: number,
